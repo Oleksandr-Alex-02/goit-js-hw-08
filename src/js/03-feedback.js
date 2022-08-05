@@ -1,29 +1,28 @@
-import { save, parse, removeKey } from './storage.js';
-// import throttle from 'lodash.throttle';
-
+import { save, getItemKey, removeKey } from './storage.js';
+import throttle from 'lodash.throttle';
+const FEEDBACK_FORM_STATE = 'feedback-form-state';
 const formData = {};
-console.log(formData);
 
 const form = document.querySelector('.feedback-form');
 
 form.addEventListener('input', function (e) {
   formData[e.target.name] = e.target.value;
-  save('feedback-form-state', JSON.stringify(formData));
-  localStorageValue();
+  throttle(save, 500)(FEEDBACK_FORM_STATE, JSON.stringify(formData));
 });
-console.log(parse('feedback-form-state'));
 // localStorage
 
-function localStorageValue() {
-  try {
-    return parse('feedback-form-state') === null
-      ? undefined
-      : console.log('10');
-  } catch (error) {
-    console.error('Get state error: ', error.message);
-  }
+localStorageValue();
 
-  console.log(parse('feedback-form-state'));
+function localStorageValue() {
+  const proverka = getItemKey(FEEDBACK_FORM_STATE);
+  if (proverka) {
+    if (proverka.email) {
+      form.email.value = proverka.email;
+    }
+    if (proverka.message) {
+      form.message.value = proverka.message;
+    }
+  }
 }
 
 // SABMIT;
@@ -37,12 +36,10 @@ function handleSubmit(e) {
   } = e.currentTarget;
 
   if (email.value === '' || message.value === '') {
-    return;
-    alert('Please fill in all the fields!');
+    return alert('Please fill in all the fields!');
   }
-  removeKey('feedback-form-state');
+  removeKey(FEEDBACK_FORM_STATE);
   const formData = new FormData(form);
   const valuesFotm = Object.fromEntries(formData.entries());
-  console.log(valuesFotm);
   e.currentTarget.reset();
 }

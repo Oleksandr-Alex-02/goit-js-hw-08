@@ -6,7 +6,7 @@ export const save = (key, value) => {
   }
 };
 
-export const parse = key => {
+export const getItemKey = key => {
   try {
     const serializedState = localStorage.getItem(key);
     return serializedState === null ? undefined : JSON.parse(serializedState);
