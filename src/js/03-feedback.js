@@ -1,6 +1,6 @@
 import { save, getItemKey, removeKey } from './storage.js';
 import throttle from 'lodash.throttle';
-FEEDBACK_FORM_STATE = 'feedback-form-state';
+const FEEDBACK_FORM_STATE = 'feedback-form-state';
 let formData = getItemKey(FEEDBACK_FORM_STATE) || {};
 
 const form = document.querySelector('.feedback-form');
