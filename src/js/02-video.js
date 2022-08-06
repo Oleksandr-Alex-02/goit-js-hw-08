@@ -7,12 +7,16 @@ const VIDEOPLAYER_CURRENT_TIME = 'videoplayer-current-time';
 const iframe = document.querySelector('iframe');
 const player = new Player(iframe);
 
-player.on('timeupdate', throttle(assaaes, 1000));
+player.on('timeupdate', throttle(saveVideo, 1000));
 
-function assaaes({ seconds }) {
+function saveVideo({ seconds }) {
   save(VIDEOPLAYER_CURRENT_TIME, seconds);
 }
 
-if (getItemKey(VIDEOPLAYER_CURRENT_TIME)) {
-  player.setCurrentTime(getItemKey(VIDEOPLAYER_CURRENT_TIME));
+startVideo();
+
+function startVideo() {
+  if (getItemKey(VIDEOPLAYER_CURRENT_TIME)) {
+    player.setCurrentTime(getItemKey(VIDEOPLAYER_CURRENT_TIME));
+  }
 }

@@ -5,7 +5,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 const divGallery = document.querySelector('.gallery');
 
 function galereaImag(galleryItems) {
-  const array = galleryItems
+  const newGallery = galleryItems
     .map(({ preview, original, description }) => {
       return `
         <a class="gallery__item" href="${original}">
@@ -14,7 +14,7 @@ function galereaImag(galleryItems) {
     })
     .join('');
 
-  return array;
+  return newGallery;
 }
 
 // bcnccb
