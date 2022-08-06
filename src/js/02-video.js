@@ -13,10 +13,10 @@ function saveVideo({ seconds }) {
   save(VIDEOPLAYER_CURRENT_TIME, seconds);
 }
 
-startVideo();
 
-function startVideo() {
   if (getItemKey(VIDEOPLAYER_CURRENT_TIME)) {
     player.setCurrentTime(getItemKey(VIDEOPLAYER_CURRENT_TIME));
   }
-}
+
+// startVideo();
+// function startVideo() {}
