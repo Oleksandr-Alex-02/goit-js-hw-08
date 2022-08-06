@@ -1,14 +1,17 @@
 import { save, getItemKey, removeKey } from './storage.js';
 import throttle from 'lodash.throttle';
-const FEEDBACK_FORM_STATE = 'feedback-form-state';
-const formData = {};
+FEEDBACK_FORM_STATE = 'feedback-form-state';
+let formData = getItemKey(FEEDBACK_FORM_STATE) || {};
 
 const form = document.querySelector('.feedback-form');
 
-form.addEventListener('input', function (e) {
+form.addEventListener('input', throttle(saveValue, 500));
+
+function saveValue(e) {
   formData[e.target.name] = e.target.value;
-  throttle(save, 500)(FEEDBACK_FORM_STATE, JSON.stringify(formData));
-});
+  save(FEEDBACK_FORM_STATE, JSON.stringify(formData));
+}
+
 // localStorage
 
 localStorageValue();

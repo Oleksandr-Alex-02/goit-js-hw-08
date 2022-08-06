@@ -1,5 +1,7 @@
 export const save = (key, value) => {
   try {
+    // const stringValue = !String(value);
+    // const serializedState = JSON.stringify(stringValue);
     localStorage.setItem(key, value);
   } catch (error) {
     console.error('Set state error: ', error.message);
