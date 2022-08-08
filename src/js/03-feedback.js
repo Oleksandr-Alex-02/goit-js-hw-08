@@ -44,5 +44,6 @@ function handleSubmit(e) {
   removeKey(FEEDBACK_FORM_STATE);
   const formData = new FormData(form);
   const valuesFotm = Object.fromEntries(formData.entries());
+  console.log(valuesFotm);
   e.currentTarget.reset();
 }
